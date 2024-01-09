@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        body{
+            background-color: bisque;
+            color: #000;
+            text-align: center;
+            font-size: 35px;
+        }
+        .main{
+            width: 500px;
+            
+            border: 2px solid gray;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 100px;
+            text-align: center;
+            background-color: whitesmoke;
+
+        }
+        .main input{
+            width: 300px;
+            height: 35px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 18px;
+            color: #000;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .main button{
+            width: 100px;
+            height: 35px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+        .box img{
+            width: 200px;
+            height: 200px;
+            border: 6px solid gray;
+            border-radius: 70px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .box2{
+          margin-top: 15px;
+          margin-bottom: 20px;
+          display: flex;
+          justify-content: space-between;
+         
+        }
+        .wind{
+            margin-left: 15px;
+        }
+        .humidity {
+            margin-right: 15px;
+        }
+       
+
+
+    </style>
+</head>
+<body>
+   
+    <div class="main">
+        <form action="">
+        <input type="search" name="" id="input" placeholder="search any location">
+        <button id="search" type="submit">search</button>
+    </form>
+        <div class="box">
+            <img src="image 1.avif" alt="">
+        </div>
+        <div id="allround">
+        <!-- <h1 id="temp">28°C</h1>
+        <h2 id="city">Banglore</h2>
+        <div class="box2">
+            <div class="wind">
+                <h4>wind</h4>
+                <p id="wind">12 km/ph</p>
+            </div>
+            <div class="humidity">
+               <h4>humidity</h4>
+               <p id="humidity">80%</p>
+            </div>
+        </div> -->
+        </div>
+    </div>
+    <script>
+        const API_KEY = "c38d74ba8b3d0ebdb383ad0f9359220e"
+       // const API = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}&units=metric";
+       const inputBox = document.querySelector("#input")
+       const form = document.querySelector("form")
+       const allround = document.querySelector("#allround")
+    //    const temp = document.querySelector("#temp")
+    //    const cityName = document.querySelector("#city")
+    //    const wind = document.querySelector("#wind")
+    //    const humidity = document.querySelector("#humidity")
+        
+      const getWhether = async(city) => {
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+        const response = await fetch (url)
+        const data = await response.json()
+        console.log(data)
+       return showWhether(data)
+      }
+      const showWhether = (data) => {
+        if (data.cod == "404") {
+        allround.innerHTML = `<h2> City Not Found <h2>`
+        return;
+        }
+        allround.innerHTML =
+         `
+         <h1>${data.main.temp}</h1>
+        <h2>${data.name}</h2>
+        <div class="box2">
+            <div class="wind">
+                <h4>wind</h4>
+                <p>${data.wind.speed}
+                    km/ph</p>
+            </div>
+            <div class="humidity">
+               <h4>humidity</h4>
+               <p>${data.main.humidity}</p>
+            </div>
+        </div>
+
+        `
+
+      }
+      
+      form.addEventListener('submit', function (e) {
+        getWhether(inputBox.value)
+        e.preventDefault();
+      })
+    </script>
+</body>
+</html>

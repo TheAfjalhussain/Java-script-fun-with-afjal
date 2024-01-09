@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: blanchedalmond;
+            min-height: 100vh;
+
+        }
+        #main{
+            width: 550px;
+           
+            border: 2px solid gray;
+            border-radius: 15px;
+            margin: auto;
+            margin-top: 150px;
+            background-color: #fff;
+            color: #000;
+           
+
+        }
+        h2{
+            font-size: 30px;
+            margin-top: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+        }
+        #quotes{
+            font-size: 20px;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+        }
+        #writer{
+            align-items: end;
+            text-align: end;
+            margin-top: 40px;
+            margin-right: 40px;
+        }
+        .btn{
+            margin: auto;
+            text-align: center;
+        }
+        button{
+         cursor: pointer;
+         width: 80px;
+         height: 35px;
+         border: 1px solid gray;
+         border-radius: 15px;
+       
+         font-size: 14px;
+         margin-bottom: 20px;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h2>Random Quotes Generater</h2>
+        <blockquote id="quotes">loading...</blockquote>
+        <div id="writer">loading...</div>
+       <div class="btn">
+        <button onclick="randomQuotes(API_url)">quotes</button>
+        <button onclick="tweeter()">twitter</button>
+        
+    </div>
+    <script>
+        const API_url = "https://api.quotable.io/random";
+        const quotes = document.getElementById("quotes");
+        const writer = document.getElementById("writer");
+        const randomQuotes = async(url) => {
+         const response = await fetch(url);
+         const data = await response.json()
+         console.log(data);
+         const contant = `${data.content}`
+         quotes.innerHTML = contant;
+         const author = `${data.author}`
+         writer.innerHTML = author
+        }
+        function tweeter(){
+            window.open("https:///twitter.com/intent/tweet?text=" + quotes.innerHTML + 
+            "  ---by  " +  writer.innerHTML ,"tweet Window","width=600, height = 300")
+        }
+
+    </script>
+</body>
+</html>

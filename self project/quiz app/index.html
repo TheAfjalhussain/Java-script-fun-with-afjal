@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="main">
+
+        <div class="container">
+            <div class="col">
+                <h3 id="questionBox">
+                    1) Lorem ipsum dolor sit amet, consectetur adipisicing elit Debitis?
+                </h3>
+            </div>
+            <div class="col box">
+                <input name="option" type="radio" id="first" value="a" required>
+                <label for="first">Testing 1</label>
+            </div>
+            <div class="col box">
+                <input name="option" type="radio" id="second" value="b" required>
+                <label for="second">Testing 2</label>
+            </div>
+            <div class="col box">
+                <input name="option" type="radio" id="third" value="c" required>
+                <label for="third">Testing 3</label>
+            </div>
+            <div class="col box">
+                <input name="option" type="radio" id="fourth" value="d" required>
+                <label for="fourth">Testing 4</label>
+            </div>
+            <button id="submit">Submit</button>
+        </div>
+
+    </section>
+    <script>
+        const quizData = [{
+    question: "Which of the following is a client site language?",
+    a: "Java",
+    b: "C",
+    c: "Python",
+    d: "JavaScript",
+    correct: "d",
+},
+{
+    question: "What does HTML stand for?",
+    a: "Hypertext Markup Language",
+    b: "Cascading Style Sheet",
+    c: "Jason Object Notation",
+    d: "Helicopters Terminals Motorboats Lamborginis",
+    correct: "a",
+},
+{
+    question: "What year was JavaScript launched?",
+    a: "1996",
+    b: "1995",
+    c: "1994",
+    d: "none of the above",
+    correct: "b",
+},
+{
+    question: "What does CSS stands for?",
+    a: "Hypertext Markup Language",
+    b: "Cascading Style Sheet",
+    c: "Jason Object Notation",
+    d: "Helicopters Terminals Motorboats Lamborginis",
+    correct: "b",
+}
+];
+let index = 0;
+const questionBox = document.getElementById("questionBox");
+const optionInputs = document.querySelectorAll(".input")
+ const loadquestion = () => {
+     const ques = quizData[index]
+     console.log(ques)
+     questionBox.innerText = `${index + 1}. ${ques.question}`
+     
+ }
+ loadquestion();
+    </script>
+</body>
+</html>

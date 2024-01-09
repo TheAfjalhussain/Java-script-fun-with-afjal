@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/7a2d6c58d0.js" crossorigin="anonymous"></script>
+    <style>
+        body{
+            background-color: lightblue;
+            color: #000;
+            text-align: center;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10%;
+        }
+        .main{
+            width: 900px;
+            display: flex;
+            overflow-x: scroll;
+            margin: auto;
+        }
+        .main div{
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 15px;
+            padding: 10px;
+            flex: none;
+        }
+        .main div img{
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .main::-webkit-scrollbar{
+            display: none;
+        }
+        #NextBtn ,#BackBtn {
+            width: 50px;
+            cursor: pointer;
+            margin: 40px;
+        }
+        .main div img:hover{
+            filter: grayscale(0%);
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+       
+    </style>
+</head>
+<body>
+    <h1>Image-Gallery</h1>
+    <div class="container">
+      <div id="NextBtn">  <i class="fa-solid fa-angles-right"></i></div>
+        <div class="main">
+            <div>
+               <span><img src="image-2.webp" alt=""></span>
+               <span><img src="image-3.webp" alt=""></span>
+               <span><img src="image-2.webp" alt=""></span>
+        </div>
+        <div>
+            <span><img src="image-3.webp" alt=""></span>
+            <span><img src="image-2.webp" alt=""></span>
+            <span><img src="image-3.webp" alt=""></span>
+        </div>
+    </div>
+   <div id="BackBtn"><i class="fa-solid fa-angles-left"></i></div>
+</div>
+    <script>
+        const main = document.querySelector(".main")
+        const NextBtn = document.getElementById("NextBtn")
+        const BackBtn = document.getElementById("BackBtn")
+      
+        NextBtn.addEventListener('click', function () {
+            main.scrollLeft += 900
+            main.style.scrollBehavier = "smooth";
+        })
+
+        BackBtn.addEventListener('click', function () {
+            main.scrollLeft -= 900
+            main.style.scrollBehavier = "smooth";
+        })
+        main.addEventListener('wheel',function (e) {
+            e.preventDefault();
+            main.scrollLeft += e.deltaY;
+            main.style.scrollBehavier = "auto";
+        })
+    </script>
+</body>
+
+</html>

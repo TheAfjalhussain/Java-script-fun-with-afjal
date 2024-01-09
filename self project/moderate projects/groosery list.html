@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Grocery List</title>
+</head>
+<body>
+    <div id="groceryContainer">
+        <h1>Grocery List</h1>
+        <input type="text" id="itemInput" placeholder="Enter item">
+        <button onclick="addItem()">Add Item</button>
+        <ul id="groceryList"></ul>
+    </div>
+    <script>
+        function addItem() {
+    const itemInput = document.getElementById("itemInput");
+    const groceryList = document.getElementById("groceryList");
+
+    if (itemInput.value.trim() !== "") {
+        const newItem = document.createElement("li");
+        newItem.innerHTML = `
+            <span>${itemInput.value}</span>
+            <button onclick="toggleItem(this)">Toggle</button>
+            <button onclick="removeItem(this)">Remove</button>
+        `;
+        groceryList.appendChild(newItem);
+        itemInput.value = "";
+    }
+}
+
+function toggleItem(button) {
+    const item = button.parentNode;
+    item.classList.toggle("purchased");
+}
+
+function removeItem(button) {
+    const item = button.parentNode;
+    item.parentNode.removeChild(item);
+}
+
+    </script>
+</body>
+</html>

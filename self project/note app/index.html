@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#main {
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 50px;
+    background-color: #81ecec;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#addBtn {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    background-color: #2d3436;
+    color: white;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+}
+
+.note {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    margin: 15px;
+    margin-top: 55px;
+}
+
+.tool {
+    width: 100%;
+    background-color: #2d3436;
+    color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: end;
+}
+
+.tool i {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.note textarea {
+    border: none;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.note textarea:focus {
+    border: 0;
+    outline: 0;
+}
+    </style>
+</head>
+<body>
+    <button id="addBtn">
+        <i class="fas fa-plus"></i>
+        Add Note
+    </button>
+    
+    <div id="main">
+      
+        <!-- <div class="note">
+            <div class="tool">
+                <i class="fas fa-save"></i>
+                <i class="fas fa-trash"></i>
+            </div>
+            <textarea></textarea>
+        </div>
+       -->
+        <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"></script>
+        <script>
+            const addBtn = document.getElementById("addBtn")
+            const main = document.getElementById("main");
+
+            addBtn.addEventListener('click',function () {
+                addNotes()
+            })
+            const addNotes = () => {
+                const Note = document.createElement("div")
+                Note.classList.add("note")
+                Note.innerHTML = `
+                <div class="tool">
+                <i class="fas fa-save"></i>
+                <i class="fas fa-trash"></i>
+            </div>
+            <textarea></textarea>
+                `;
+                main.appendChild(Note)
+            }
+        </script>
+</body>
+</html>

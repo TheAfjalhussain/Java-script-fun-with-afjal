@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: blanchedalmond;
+            color: black;
+            min-height: 100vh;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 35px;
+        }
+        .main{
+            width: 500px;
+            height: 300px;
+            border: 2px solid gray;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #000;
+            margin: auto;
+            margin-top: 150px;
+            margin-bottom: 20px;
+        }
+        p{
+            font-size: 22px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        input{
+            width: 250px;
+            height: 35px;
+            border: 2px solid gray;
+            border-radius: 5px;
+            font-size: 18px;
+            color: gray;
+        }
+        button{
+            width: 70px;
+            height: 35px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        #massage{
+            font-size: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Guess The Number :- Game
+    </h1>
+    <div class="main">
+    <p>Guess the number between 1 and 100</p>
+   
+        <input type="text" name="" id="number" placeholder="Enter your number">
+        <button id="btn">Guess</button>
+        
+   
+    <p id="massage"></p>
+</div>
+<script>
+    const randomNum = Math.floor(Math.random()*100 + 1)
+    const guessNum = document.getElementById("number");
+    const btn = document.getElementById("btn");
+    const massage = document.getElementById("massage");
+    let attempts = 0;
+
+    btn.addEventListener("click",function () {
+        
+          //   const Guess = parseInt(guessNum.value);
+             attempts++;
+
+             if (isNaN(guessNum.value) || guessNum.value < 1 || guessNum.value > 100) {
+                massage.textContent = 'Please enter a valid number between 1 and 100.';
+             }else if(guessNum.value === randomNum) {
+                alert("your selected number and random number is same !!.");
+                guessNum.disabled = true;
+                btn.disabled = true;
+
+             }else if (guessNum.value < randomNum) {
+                 massage.textContent = `your choose number is too low`;
+             }
+             else {
+                massage.textContent = `your choose number is too high`;
+             }
+             guessNum.value = "";
+             guessNum.focus();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tens Stopwatch</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #stopwatch {
+      font-size: 2em;
+    }
+
+    button {
+      font-size: 1em;
+      margin: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+<div id="stopwatch">00:00.0</div>
+<button onclick="startStopwatch()">Start</button>
+<button onclick="stopStopwatch()">Stop</button>
+<button onclick="resetStopwatch()">Reset</button>
+
+<script>
+  let timer;
+  let time = 0;
+
+  function startStopwatch() {
+    if (!timer) {
+      timer = setInterval(updateStopwatch, 100);
+    }
+  }
+
+  function stopStopwatch() {
+    clearInterval(timer);
+    timer = null;
+  }
+
+  function resetStopwatch() {
+    stopStopwatch();
+    time = 0;
+    updateStopwatch();
+  }
+
+  function updateStopwatch() {
+    const seconds = Math.floor(time / 10);
+    const tenths = time % 10;
+
+    const displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+
+    document.getElementById("stopwatch").innerText = `${displaySeconds}.${tenths}`;
+    time++;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <style>
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    body{
+        background-color: beige;
+    }
+    .main{
+        width: 500px;
+        height: 350px;
+        border: 2px solid gray;
+        border-radius: 10px;
+        margin: auto;
+        margin-top: 150px;
+        text-align: center;background-color: blanchedalmond;
+        
+    }
+    h1{
+        margin-top: 20px;
+        font-size: 35px;
+        margin-bottom: 20px;
+    }
+    #displayTime{
+        font-size: 28px;
+        margin-top: 60px;
+        margin-bottom: 20px;
+    }
+    button{
+        width: 60px;
+        height: 25px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin-top: 30px;
+    }
+   </style>
+</head>
+<body>
+    <div class="main">
+        <h1>Stop-Watch</h1>
+        <div id="displayTime">00:00:00</div>
+        <button onclick="start()">start</button>
+        <button onclick="stop()">stop</button>
+        <button onclick="reset()">reset</button>
+    </div>
+ <script>
+    const displayTime = document.getElementById("displayTime");
+    let timer
+     hours = 0;
+     minutes = 0;
+     seconds = 0;
+
+  
+    function updateClock() {
+         seconds++;
+        if (seconds == 60) {
+            seconds = 0;
+            minutes++; 
+            if (minutes == 60) {
+                minutes = 0;
+                hours++;
+            }
+        }
+         let h = hours < 10 ? "0" + hours : hours;
+         let m = minutes < 10 ? "0" + minutes : minutes;
+         let s = seconds < 10 ? "0" + seconds : seconds;
+
+         displayTime.innerHTML = h + ":" + m + ":" + s;
+    }
+    function start(){
+          if (!timer) {
+           
+           timer = setInterval(updateClock,1000);
+          }
+         
+    }
+    function stop(){
+        clearInterval(timer);
+    }
+
+    function reset(){
+        clearInterval(timer);
+         hours = 0;
+         minutes = 0;
+         seconds = 0;
+         
+        displayTime.innerHTML = "00:00:00";
+    }
+ </script>
+</body>
+</html>

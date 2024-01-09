@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: blueviolet;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            min-width: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin-top: 150px;
+        }
+        input{
+            background-color: whitesmoke;
+            width: 350px;
+            height: 35px;
+            color: black;
+            font-size: 20px;
+            border: none;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        #main{
+            width: 600px;
+           
+            background-color: whitesmoke;
+            border: 2px solid gray;
+            border-radius: 15px;
+           margin-top: 15px;
+          display: flex;
+        }
+        img{ 
+            width: 150px;
+            height: 150px;
+            border: 1px solid gray;
+            border-radius: 75px;
+            margin-top: 20px;
+            margin-left: 10px;
+           
+        }
+        
+        .details{
+            font-size: medium;
+            margin: 40px 20px;
+            gap: 10px;
+        }
+        ul{
+            display: flex;
+        }
+        li{
+            margin: 10px 10px;
+        }
+        .repo {
+             background-color: #2a2a72;
+             border-radius: 5px;
+             display: inline-block;
+             color: white;
+             font-size: 0.7rem;
+             padding: 0.25rem 0.5rem;
+             margin-right: 0.5rem;
+             margin-bottom: 0.5rem;
+             text-decoration: none;
+}
+        
+
+    </style>
+</head>
+<body>
+  
+       <form action="" onsubmit="return formsubmit()">
+      <input type="search" name="" id="search" placeholder="search github profile">   
+    </form>
+    <div id="main">
+       
+        <!--img src="" alt="">
+    
+      <div class="details">
+        <h2>name</h2>
+        <p>bio</p>
+        <ul>
+            <li>###<strong>followers</strong></li>
+            <li>###<strong>following</strong></li>
+            <li>###<strong>repos</strong></li>
+        </ul>
+        <div id="repos">
+            <a class="repo" href="#" target="_blank">repo 1</a>
+            <a class="repo" href="#" target="_blank">repo 2</a>
+            <a class="repo" href="#" target="_blank">repo 3</a>
+        </div>
+      </div-->
+  
+    </div>
+    <script>
+        const apiurl = "https://api.github.com/users/"
+        const main = document.getElementById("main")
+        const search = document.getElementById("search")
+        const getuser = async (username) => {
+            const response = await fetch (apiurl + username)
+            const data = await response.json()
+          //  console.log(data)
+            const avatar = 
+            
+            `
+          
+        <img src="
+        ${data.avatar_url}" alt="">
+     
+      <div class="details">
+        <h2>${data.name}</h2>
+        <p>${data.bio}</p>
+        <ul>
+            <li>${data.followers}<strong>followers</strong></li>
+            <li>${data.following}<strong>following</strong></li>
+            <li>${data.public_repos}<strong>repos</strong></li>
+        </ul>
+        <div id="repos">
+            
+        </div>
+      </div
+            `;
+            main.innerHTML = avatar;
+            getrepos(username)
+       }
+        getuser("hiteshchoudhary");
+
+        const getrepos = async (username) => {
+            const repos = document.getElementById("repos")
+            const response = await fetch(apiurl + username + "/repos")
+            const data = await response.json();
+            // console.log(data);
+            // console.log(repos);
+          
+            data.forEach(
+                (item) => {
+                    console.log(item)
+                    const elem = document.createElement("a")
+                    elem.classList.add("repo")
+                    elem.href = item.html_url
+                    elem.innerText = item.name
+                    elem.target = "_blank"
+                    repos.appendChild(elem)
+                }
+            )
+        }
+
+        function formsubmit(){
+            if (search.value != "") {
+                getuser(search.value)
+                search.value = ""
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
